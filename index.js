@@ -80,7 +80,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
 // Home Route
-app.get("/",(req,res)=>{
+app.get("/listings",(req,res)=>{
     res.send("home");
 });
 
