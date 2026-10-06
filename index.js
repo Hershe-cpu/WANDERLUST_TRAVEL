@@ -78,11 +78,10 @@ app.use(express.static(path.join(__dirname,"public")));
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
+const listingController = require("./controllers/listings.js");
+const wrapAsync = require('./utils/wrapAsync.js');
 
-// Home Route
-app.get("/",(req,res)=>{
-    res.render("index.ejs");
-});
+
 
 app.use((req,res,next)=>{
     res.locals.success=req.flash("success");
@@ -90,6 +89,8 @@ app.use((req,res,next)=>{
     res.locals.currUser = req.user;
     next();
 })
+
+app.get("/",wrapAsync(listingController.index))
 
 app.use("/listings",listingRouter);
 app.use("/listings/:id/reviews",reviewRouter);

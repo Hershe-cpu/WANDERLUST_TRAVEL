@@ -31,7 +31,7 @@
             </div>
         </div>
     
-        <% if(currUser && listing.owner._id.equals(currUser._id)){%>
+        <% if(locals.currUser && listing.owner._id.equals(locals.currUser._id)){%>
         <div class="btns d-flex align-items-center mb-3">
             <a 
                 href="/listings/<%= listing._id%>/edit" 
@@ -46,7 +46,7 @@
 
         <div class="col-8 offset-3 mb-3">
             
-            <% if(currUser){%>
+            <% if(locals.currUser){%>
             <hr>
             <h4>Leave a Review</h4>
             <form action="/listings/<%= listing._id%>/reviews" method="post" novalidate class="needs-validation">
@@ -92,7 +92,7 @@
                     <p class="card-text"><%= ele.comment%></p>                     
                     <p class="starability-result card-text" data-rating="<%= ele.rating%>"></p>
                 </div> 
-                <% if(currUser && ele.author._id.equals(currUser._id)){%>
+                <% if(locals.currUser && ele.author._id.equals(locals.currUser._id)){%>
                 <form class="mb-3 ms-3" method="post" action="/listings/<%= listing._id%>/reviews/<%= ele._id%>?_method=DELETE">
                     <button class="btn btn-sm btn-outline-dark">Delete</button>
                 </form>
