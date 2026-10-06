@@ -80,6 +80,9 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
 // Home Route
+app.get("/",(req,res)=>{
+    res.render("index.ejs");
+});
 
 app.use((req,res,next)=>{
     res.locals.success=req.flash("success");
