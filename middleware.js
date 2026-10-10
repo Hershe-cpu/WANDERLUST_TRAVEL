@@ -21,7 +21,7 @@ module.exports.saveRedirectUrl = (req,res,next) =>{
 module.exports.isOwner = async(req,res,next)=>{
     let {id} = req.params;
     let listing = await Listing.findById(id);
-    if(!listing.owner["_id"].equals(res.locals.currUser._id) ){
+    if(!listing.owner["_id"].equals(currUser._id) ){
         req.flash("error","You dont have permission.");
         return res.redirect(`/listings/${id}`);
 
@@ -53,8 +53,8 @@ module.exports.validateReview = (req,res,next)=>{
 module.exports.isReviewAuthor = async(req,res,next)=>{
     let {id,review_id} = req.params;
     let review = await Review.findById(review_id);
-    console.log(review);
-    if(!review.author._id.equals(res.locals.currUser._id)){
+   
+    if(!review.author._id.equals(currUser._id)){
         req.flash("error","You dont have permission.");
         return res.redirect(`/listings/${id}`);
 
